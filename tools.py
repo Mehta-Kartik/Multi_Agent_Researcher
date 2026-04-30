@@ -42,4 +42,4 @@ def scrape_url(url:str) -> str:
         return f"Coult not scrape URL: {str(e)}"
 
 
-print(scrape_url.invoke("https://www.moneycontrol.com/news/business/markets/sensex-today-stock-market-live-updates-nifty50-share-price-crude-fii-gift-nifty-rupee-latest-updates-27-04-2026-liveblog-13900043.html"))
+# print(scrape_url.invoke("https://www.moneycontrol.com/news/business/markets/sensex-today-stock-market-live-updates-nifty50-share-price-crude-fii-gift-nifty-rupee-latest-updates-27-04-2026-liveblog-13900043.html"))
