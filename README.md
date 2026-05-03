@@ -1,170 +1,179 @@
-🔬 ResearchAI Pipeline
-An end-to-end multi-agent research system that automates the entire workflow:
+# 🔬 ResearchAI Pipeline
 
-Search → Scrape → Write → Critique
+An end-to-end **multi-agent research system** that automates the entire workflow:
 
-Built using LangChain + Groq (LLMs) + Streamlit, this app performs real-time research and generates structured reports with AI-driven evaluation.
+**Search → Scrape → Write → Critique**
 
-🚀 Features
-🔍 Search Agent – Finds relevant, recent web data using Tavily
+Built using **LangChain + Groq (LLMs) + Streamlit**, this app performs real-time research and generates structured reports with AI-driven evaluation.
 
-📄 Reader Agent – Scrapes and extracts clean content from URLs
+***
 
-✍️ Writer Chain – Generates structured research reports
+## 🚀 Features
 
-🧐 Critic Chain – Evaluates report quality with scoring and feedback
+- 🔍 **Search Agent** – Finds relevant, recent web data using Tavily
+- 📄 **Reader Agent** – Scrapes and extracts clean content from URLs
+- ✍️ **Writer Chain** – Generates structured research reports
+- 🧐 **Critic Chain** – Evaluates report quality with scoring and feedback
+- ⚡ **Fast LLM inference** via Groq (LLaMA 3.1)
+- 🎨 **Modern Streamlit UI** with live pipeline tracking
 
-⚡ Fast LLM inference via Groq (LLaMA 3.1)
+***
 
-🎨 Modern Streamlit UI with live pipeline tracking
+## 🧠 Architecture
 
-🧠 Architecture
-The system follows a 4-step AI pipeline:
+The system follows a **4-step AI pipeline**:
 
-Search Agent
+### 1. Search Agent
 
-Uses web_search tool
+- Uses `web_search` tool
+- Retrieves top results (titles, URLs, snippets)
 
-Retrieves top results (titles, URLs, snippets)
+### 2. Reader Agent
 
-Reader Agent
+- Uses `scrape_url` tool
+- Extracts detailed content from the best source
 
-Uses scrape_url tool
+### 3. Writer Chain
 
-Extracts detailed content from best source
+- Combines search + scraped data
+- Produces a structured report with:
+  - Introduction
+  - Key Findings
+  - Conclusion
+  - Sources
 
-Writer Chain
+### 4. Critic Chain
 
-Combines search + scraped data
+- Reviews the generated report
+- Outputs:
+  - Score (X/10)
+  - Strengths
+  - Areas to Improve
+  - Final verdict
 
-Produces structured report:
+***
 
-Introduction
+## 🛠️ Tech Stack
 
-Key Findings
+- **LLM**: Groq (LLaMA 3.1 8B Instant)
+- **Framework**: LangChain
+- **Frontend**: Streamlit
+- **Search API**: Tavily
+- **Web Scraping**: BeautifulSoup + Requests
+- **Environment**: Python + dotenv
 
-Conclusion
+***
 
-Sources
+## 📁 Project Structure
 
-Critic Chain
-
-Reviews report
-
-Outputs:
-
-Score (X/10)
-
-Strengths
-
-Areas to Improve
-
-Final verdict
-
-🛠️ Tech Stack
-LLM: Groq (LLaMA 3.1 8B Instant)
-
-Framework: LangChain
-
-Frontend: Streamlit
-
-Search API: Tavily
-
-Web Scraping: BeautifulSoup + Requests
-
-Environment: Python + dotenv
-
-📁 Project Structure
-text
+```bash
 .
 ├── app.py          # Streamlit UI + pipeline execution
-├── agents.py       # Agent + chain definitions
+├── agents.py       # Agent and chain definitions
 ├── tools.py        # Web search and scraping tools
 ├── .env            # API keys (not committed)
-⚙️ Setup
-1. Clone Repository
-text
+```
+
+***
+
+## ⚙️ Setup
+
+### 1. Clone the Repository
+
+```bash
 git clone <repo-url>
 cd research-ai
-2. Install Dependencies
-text
-pip install -r requirements.txt
-3. Add Environment Variables
-Create a .env file:
+```
 
-text
+### 2. Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Add Environment Variables
+
+Create a `.env` file in the project root:
+
+```env
 TAVILY_API_KEY=your_tavily_api_key
 GROQ_API_KEY=your_groq_api_key
-⚠️ Important: Do NOT hardcode API keys in code (security risk)
+```
 
-▶️ Run the App
-text
+> ⚠️ **Important:** Do not hardcode API keys in source code.
+
+***
+
+## ▶️ Run the App
+
+```bash
 streamlit run app.py
-Then open in browser:
+```
 
-text
+Then open your browser at:
+
+```text
 http://localhost:8501
-🧪 Example Workflow
-Input:
+```
 
-text
-"Latest advances in multimodal LLMs"
-Pipeline Output:
+***
 
-Search results from web
+## 🧪 Example Workflow
 
-Scraped article content
+**Input:**
 
-Structured research report
+```text
+Latest advances in multimodal LLMs
+```
 
-Critic evaluation (e.g., Score: 8/10)
+**Pipeline Output:**
 
-🔧 Key Components
-Agents (agents.py)
-build_search_agent() → Uses web search tool
+- Search results from the web
+- Scraped article content
+- Structured research report
+- Critic evaluation (for example, Score: 8/10)
 
-build_reader_agent() → Uses scraping tool
+***
 
-writer_chain → Report generation
+## 🔧 Key Components
 
-critic_chain → Report evaluation
+### `agents.py`
 
-Tools (tools.py)
-web_search(query) → Tavily-powered search
+- `build_search_agent()` → Uses the web search tool
+- `build_reader_agent()` → Uses the scraping tool
+- `writer_chain` → Generates the research report
+- `critic_chain` → Evaluates the generated report
 
-scrape_url(url) → Clean text extraction from webpages
+### `tools.py`
 
-UI (app.py)
-Interactive pipeline execution
+- `web_search(query)` → Tavily-powered search
+- `scrape_url(url)` → Clean text extraction from webpages
 
-Progress tracking (4 steps)
+### `app.py`
 
-Tabs:
+- Interactive pipeline execution
+- Live progress tracking across 4 steps
+- Tab-based results view:
+  - Full Report
+  - Source Data
+  - Critic Review
+- Downloadable report output
 
-Full Report
+***
 
-Source Data
+## ⚠️ Notes
 
-Critic Review
+- A stable internet connection is required for search and scraping
+- Some websites may block scraping requests
+- Output quality depends on the relevance of search results
+- API rate limits may affect usage
 
-Downloadable report
+***
 
-⚠️ Notes
-Ensure stable internet (required for search + scraping)
+## 📌 Future Improvements
 
-Some websites may block scraping
-
-Output quality depends on search results
-
-API rate limits may apply
-
-📌 Future Improvements
-Multi-source scraping instead of single URL
-
-RAG-based memory (vector DB)
-
-Citation verification
-
-Async pipeline for faster execution
-
-Agent orchestration (LangGraph)
+- Multi-source scraping instead of a single URL
+- RAG-based memory with a vector database
+- Citation verification
+- Async pipeline for faster execution
+- Agent orchestration with LangGraph
