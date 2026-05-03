@@ -81,7 +81,7 @@ The system follows a **4-step AI pipeline**:
 ### 1. Clone the Repository
 
 ```bash
-git clone [<repo-url>](https://github.com/Mehta-Kartik/Multi_Agent_Researcher.git)
+git clone (https://github.com/Mehta-Kartik/Multi_Agent_Researcher.git)
 cd research-ai
 ```
 
